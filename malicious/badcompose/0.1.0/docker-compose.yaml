@@ -1,0 +1,24 @@
+# malicious/badcompose@0.1.0 — M3 lint 가 거부해야 할 위반 모음.
+#
+# ⚠️ 절대 실제 노드에서 띄우지 말 것. operator override 가 박혀야만 통과합니다.
+#
+# 위반 항목 (M3 lint § 정책 §6 기준):
+#   1. privileged: true            — capability 전부 부여
+#   2. network_mode: host          — host 네트워크 직접 접근
+#   3. cap_add: SYS_ADMIN          — capability 우회
+#   4. volumes: /etc:/host_etc     — host 루트 영역 bind (allowlist 밖)
+#   5. volumes: /var/run/docker.sock — docker 소켓 노출 = host 장악
+#   6. image: ttl.sh/anonymous     — non-allowlist registry (GHCR/Hub 외)
+#
+# 6 개 위반이라 lint 가 6 finding 을 보고해야 정상.
+
+services:
+  evil:
+    image: ttl.sh/anonymous-evil:1h
+    privileged: true
+    network_mode: host
+    cap_add:
+      - SYS_ADMIN
+    volumes:
+      - "/etc:/host_etc:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"

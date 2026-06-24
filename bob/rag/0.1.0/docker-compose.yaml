@@ -1,0 +1,13 @@
+# bob/rag@0.1.0 — alice/rag 와 별개 컨테이너.
+#
+# 포트 6333 이 alice 와 겹치므로 host port 는 6334 로 (양쪽 동시 띄울 때).
+# 컨테이너 내부 포트는 양쪽 다 6333 그대로 — bind mount 도 자기 폴더.
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    restart: "no"
+    ports:
+      - "6334:6333"
+    volumes:
+      - "./qdrant_storage:/qdrant/storage"

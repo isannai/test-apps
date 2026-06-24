@@ -1,0 +1,50 @@
+{
+  "spec_version": "1",
+  "name": "rag",
+  "version": "0.1.1",
+  "author": "alice",
+  "license": "MIT",
+  "_note": "Same surface as 0.1.0 (search/index) — patch bump only. 동일 identity (alice_rag) 의 다른 버전이라 M2 가 0.1.0 과 supersede 관계로 다룸.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search",
+        "description": "Semantic search over the indexed corpus. Returns top-k chunks with scores.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": { "type": "string", "description": "natural language query" },
+            "k":     { "type": "integer", "description": "number of results (default 5)" }
+          },
+          "required": ["query"]
+        }
+      },
+      "execution": {
+        "handler": "http",
+        "addr": "http://alice_rag:6333/search",
+        "auth": "user"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "index",
+        "description": "Add a document chunk to the index. Operator only — mutates corpus state.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id":   { "type": "string", "description": "chunk id" },
+            "text": { "type": "string", "description": "chunk body" }
+          },
+          "required": ["id", "text"]
+        }
+      },
+      "execution": {
+        "handler": "http",
+        "addr": "http://alice_rag:6333/index",
+        "auth": "admin"
+      }
+    }
+  ]
+}

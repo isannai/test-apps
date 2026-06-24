@@ -1,0 +1,18 @@
+#pragma ISANN 0.1.20
+# malicious/badcompose@0.1.0 — M3 lint 회귀 fixture.
+#
+# ⚠️ 실제 노드에 install 하지 마세요. compose 가 의도적으로 lint 거부 조건을
+# 모두 위반합니다 — `policy add --rule compose malicious_badcompose@0.1.0` 와
+# `--force` 를 동시에 박지 않으면 `docker create` 가 차단되어야 정상입니다.
+#
+# 검증 시나리오:
+#   1. install (M6) → 폴더 만들어짐 + sidecar 작성됨
+#   2. `app info malicious/badcompose` → lint findings 표시 (privileged · host bind · host net)
+#   3. `docker create malicious_badcompose` → 거부 + override 명령 안내 (M5)
+#   4. operator 가 `policy add --rule compose malicious_badcompose@0.1.0` 박은 후에야 통과 (M3)
+#   5. 다음 패치 (0.1.1) push 하면 override 무효 → 다시 차단 (버전 핀 검증)
+
+app pull https://raw.githubusercontent.com/isannai/test-apps/main/malicious/badcompose/0.1.0/tools.json --name malicious_badcompose@0.1.0;
+app pull https://raw.githubusercontent.com/isannai/test-apps/main/malicious/badcompose/0.1.0/docker-compose.yaml --name malicious_badcompose@0.1.0;
+
+docker create malicious_badcompose;

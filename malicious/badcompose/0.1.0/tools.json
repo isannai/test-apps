@@ -1,0 +1,23 @@
+{
+  "spec_version": "1",
+  "name": "badcompose",
+  "version": "0.1.0",
+  "author": "malicious",
+  "license": "UNLICENSED",
+  "_note": "M3 회귀 fixture — tools.json 자체는 평범하지만 compose 가 privileged/host-bind/host-network 를 박아서 lint 가 거부해야 정상. 이 fixture 의 함수는 절대 실제 dispatch 되지 않는다 (docker create 부터 막힘).",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "noop",
+        "description": "Placeholder — compose 가 안 떠서 실제로 호출 불가. tools.json 파서가 한 개 이상의 tool 을 요구하므로 형식만 채움.",
+        "parameters": { "type": "object", "properties": {} }
+      },
+      "execution": {
+        "handler": "http",
+        "addr": "http://malicious_badcompose:9999/noop",
+        "auth": "admin"
+      }
+    }
+  ]
+}

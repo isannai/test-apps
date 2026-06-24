@@ -1,0 +1,12 @@
+#pragma ISANN 0.1.20
+# bob/rag@0.1.0 — alice/rag 와 appname 만 같고 author 가 다른 케이스.
+#
+# 검증 포인트:
+#   - 폴더 = bob_rag@0.1.0 (alice_rag@0.1.0 과 별개)
+#   - wire 이름 = bob__rag__search (alice__rag__search 와 충돌 없음 — M0)
+#   - 둘 다 동시 install·enable 가능
+
+app pull https://raw.githubusercontent.com/isannai/test-apps/main/bob/rag/0.1.0/tools.json --name bob_rag@0.1.0;
+app pull https://raw.githubusercontent.com/isannai/test-apps/main/bob/rag/0.1.0/docker-compose.yaml --name bob_rag@0.1.0;
+
+docker create bob_rag;

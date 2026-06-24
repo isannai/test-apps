@@ -1,0 +1,10 @@
+#pragma ISANN 0.1.20
+# alice/rag@0.1.1 — patch bump.
+#
+# 변경점: qdrant 0.1.0 → 0.1.1 (compose 의 image tag pin + redis 캐시 추가).
+# M2 supersede 검증용: 이걸 enable 하면 0.1.0 이 자동 disable.
+
+app pull https://raw.githubusercontent.com/isannai/test-apps/main/alice/rag/0.1.1/tools.json --name alice_rag@0.1.1;
+app pull https://raw.githubusercontent.com/isannai/test-apps/main/alice/rag/0.1.1/docker-compose.yaml --name alice_rag@0.1.1;
+
+docker create alice_rag;

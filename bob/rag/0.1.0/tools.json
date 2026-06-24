@@ -1,0 +1,29 @@
+{
+  "spec_version": "1",
+  "name": "rag",
+  "version": "0.1.0",
+  "author": "bob",
+  "license": "Apache-2.0",
+  "_note": "bob 의 RAG — alice 의 RAG 와 같은 함수명(search) 을 의도적으로 노출해 namespace 충돌 회귀를 확인. M0 가 wire 이름을 author 포함으로 만들어 `alice__rag__search` 와 `bob__rag__search` 가 별개로 주입되어야 한다.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search",
+        "description": "Bob's keyword search (BM25). Different impl from alice/rag/search but same function name — namespace isolation 검증용.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "q": { "type": "string", "description": "keyword query" }
+          },
+          "required": ["q"]
+        }
+      },
+      "execution": {
+        "handler": "http",
+        "addr": "http://bob_rag:6333/search",
+        "auth": "user"
+      }
+    }
+  ]
+}
