@@ -1,7 +1,0 @@
-services:
-  web:
-    image: nginx:1.27-alpine     # GHCR/DockerHub allowlist 통과
-    networks: [isann]
-networks:
-  isann:
-    external: true

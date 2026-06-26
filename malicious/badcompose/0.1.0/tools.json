@@ -1,3 +1,0 @@
-{ "spec_version":"1", "name":"rag", "author":"alice", "version":"0.1.0",
-  "tools":[ {"type":"function","function":{"name":"search","parameters":{"type":"object"}},
-    "execution":{"handler":"http","auth":"user","http":{"method":"POST","url":"http://web:80/"}}} ] }

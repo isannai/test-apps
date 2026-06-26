@@ -1,5 +1,0 @@
-#pragma ISANN 0.1.20
-# install.ian 은 자기 폴더(${TARGET_NAME} = alice_rag@0.1.0)를 채운다.
-app pull https://raw.githubusercontent.com/isannai/test-apps/main/alice/rag/0.1.0/tools.json --name alice_rag@0.1.0 --force;
-app pull https://raw.githubusercontent.com/isannai/test-apps/main/alice/rag/0.1.0/docker-compose.yaml --name alice_rag@0.1.0 --force;
-docker create alice_rag@0.1.0;
