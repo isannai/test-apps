@@ -1,17 +1,5 @@
 #pragma ISANN 0.1.20
-# alice/rag@0.1.0 — install recipe.
-#
-# `app install alice/rag@0.1.0` 가 이 파일을 받아 인프로세스로 실행.
-# 실행 시점에는 이미 `apps/alice_rag@0.1.0/` 폴더가 만들어진 상태이고,
-# 아래 `app pull` 들이 그 안으로 나머지 파일을 받아온다.
-#
-# --sha256 은 v1 에서 옵션 (정책 §7). 운영 신뢰도 높이려면 채워서 push.
-
-# tools.json — LLM 이 볼 함수 정의
-app pull https://raw.githubusercontent.com/isannai/test-apps/main/alice/rag/0.1.0/tools.json --name alice_rag@0.1.0;
-
-# docker-compose.yaml — qdrant 백엔드
-app pull https://raw.githubusercontent.com/isannai/test-apps/main/alice/rag/0.1.0/docker-compose.yaml --name alice_rag@0.1.0;
-
-# 컨테이너 띄우기 (M5 에서 docker create 가 addon/apps/ 까지 탐색하면 동작)
-docker create alice_rag;
+# install.ian 은 자기 폴더(${TARGET_NAME} = alice_rag@0.1.0)를 채운다.
+app pull https://raw.githubusercontent.com/isannai/test-apps/main/alice/rag/0.1.0/tools.json --name alice_rag@0.1.0 --force;
+app pull https://raw.githubusercontent.com/isannai/test-apps/main/alice/rag/0.1.0/docker-compose.yaml --name alice_rag@0.1.0 --force;
+docker create alice_rag@0.1.0;
